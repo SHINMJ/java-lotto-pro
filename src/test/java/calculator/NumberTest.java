@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class NumberTest {
@@ -20,6 +21,14 @@ public class NumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"m", "E", "신명진", "-1", "#", ",", ":"})
     void 숫자클래스_실패케이스(String input) {
+        assertThatThrownBy(() -> Number.valueOfString(input))
+            .isInstanceOf(RuntimeException.class)
+            .hasMessage("양의 숫자만 입력해 주세요.");
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 숫자클래스_null_공백_실패(String input) {
         assertThatThrownBy(() -> Number.valueOfString(input))
             .isInstanceOf(RuntimeException.class)
             .hasMessage("양의 숫자만 입력해 주세요.");
