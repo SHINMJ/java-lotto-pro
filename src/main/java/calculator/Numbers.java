@@ -4,14 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Numbers {
+
     private final List<Number> numbers;
 
     private Numbers() {
         this.numbers = new ArrayList<>();
     }
 
+    private Numbers(List<Number> numberList) {
+        this.numbers = numberList;
+    }
+
     public static Numbers create() {
         return new Numbers();
+    }
+
+    public static Numbers of(List<Number> numberList) {
+        return new Numbers(numberList);
     }
 
     public int size() {
